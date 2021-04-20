@@ -1,4 +1,44 @@
-label{
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+
+header label{
 
     display: block;
+    font-family: 'Zen Dots', cursive;
+    color: rgb(221, 17, 17);
+    font-size: 40px;
+    text-transform: capitalize;
+}
+main label{
+    font-family: 'Zen Dots', cursive;
+    color: rgb(221, 17, 17);
+    font-size: 25px;
+    text-transform: capitalize;
+}
+main li{
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+ #indexheader{
+    display: grid;
+    grid-template-rows: 60px 20px 1fr;
+}
+
+#Salmon-Cookies table tr td{
+border: 1px solid;
+border: col;
+text-align: center;
+}
+header{
+    width: 960px;
+}
+header section img {
+    width: 300px;
+    height: 300px;
+}
+
+header section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
