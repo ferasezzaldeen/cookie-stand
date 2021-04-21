@@ -5,9 +5,12 @@ let hourofwork=['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '1
 const parentElement = document.getElementById('Salmon-Cookies');
 let tableElement = document.createElement('table');
 parentElement.appendChild(tableElement);
-let trfElement = document.createElement('tr');
-tableElement.appendChild(trfElement);
+
 let alltotal=[0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+let newbrach = document.getElementById('newBranch');
+let textar=[];
+
 function Branch(name, mincus, maxcus, avgsale, sales) {
 
   this.name = name;
@@ -16,29 +19,33 @@ function Branch(name, mincus, maxcus, avgsale, sales) {
   this.avgsale = avgsale;
   this.sales = sales;
   this.hour = hourofwork;
-
+  textar.push(this);
 }
 
 Branch.prototype.gitCusNum=function()
 {
-  return Math.ceil(getRandomInt(this.mincus, this.maxcus) * this.avgsale);
 
-};
-Branch.prototype.render=function(){let total = 0;
+
   for(let i=0;i<hourofwork.length;i++){
 
-    this.sales[i]=this.gitCusNum();
-    total=total+this.sales[i];
+    this.sales[i]=Math.ceil(getRandomInt(this.mincus, this.maxcus) * this.avgsale);
     alltotal[i]=alltotal[i]+this.sales[i];
 
 
   }
 
 
+
+};
+Branch.prototype.render=function(){
+
+
   let trElement = document.createElement('tr');
   tableElement.appendChild(trElement);
+  let total = 0;
 
   for (let i = -1; i < this.hour.length; i++) {
+
     if (i === -1) {
       let tdElement = document.createElement('td');
       tdElement.textContent = this.name;
@@ -48,6 +55,7 @@ Branch.prototype.render=function(){let total = 0;
       let tdElement = document.createElement('td');
       tdElement.textContent = this.sales[i];
       trElement.appendChild(tdElement);
+      total=total+this.sales[i];
 
 
     }
@@ -67,42 +75,48 @@ let paris = new Branch('Paris', 20, 38, 2.3, []);
 let lima = new Branch('Lima', 2, 16, 4.6, []);
 
 function header(){
+  let theadElement=document.createElement('thead');
+  tableElement.appendChild(theadElement);
+  let trElement = document.createElement('tr');
+  theadElement.appendChild(trElement);
   let thElement = document.createElement('th');
   thElement.textContent = 'location';
-  trfElement.appendChild(thElement);
+  trElement.appendChild(thElement);
 
   for (let i = 0; i < hourofwork.length; i++) {
 
     let thElement = document.createElement('th');
     thElement.textContent = hourofwork[i];
-    trfElement.appendChild(thElement);
+    trElement.appendChild(thElement);
 
 
 
   }
   thElement = document.createElement('th');
   thElement.textContent = 'location total';
-  trfElement.appendChild(thElement);
+  trElement.appendChild(thElement);
 }
 
 function footer(){
+  let tfootElement =document.createElement('tfoot');
   let trElement = document.createElement('tr');
-  tableElement.appendChild(trElement);
-  let tdElement = document.createElement('td');
-  tdElement.textContent = 'total';
-  trElement.appendChild(tdElement);
+  tableElement.appendChild(tfootElement);
+  tfootElement.appendChild(trElement);
+  let footerElement = document.createElement('td');
+  footerElement.textContent = 'total';
+  trElement.appendChild(footerElement);
   let finalTotal=0;
   for (let i = 0; i < hourofwork.length; i++) {
-    let tdElement = document.createElement('td');
-    tdElement.textContent = alltotal[i];
-    trElement.appendChild(tdElement);
+    let footerElement = document.createElement('td');
+    footerElement.textContent = alltotal[i];
+    trElement.appendChild(footerElement);
     finalTotal=finalTotal+alltotal[i];
 
 
   }
-  tdElement = document.createElement('td');
-  tdElement.textContent = finalTotal;
-  trElement.appendChild(tdElement);
+  footerElement = document.createElement('td');
+  footerElement.textContent = finalTotal;
+  trElement.appendChild(footerElement);
 }
 
 
@@ -112,6 +126,12 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
 }
+seattle.gitCusNum();
+tokyo.gitCusNum();
+dubai.gitCusNum();
+paris.gitCusNum();
+lima.gitCusNum();
+
 
 seattle.render();
 console.log(seattle);
@@ -125,4 +145,33 @@ lima.render();
 console.log(lima);
 header();
 footer();
+
+
+newbrach.addEventListener('submit', eventbutton);
+
+function eventbutton(event){
+  event.preventDefault();
+  let name= event.target.location.value;
+  let mincus=event.target.mincustomer.value;
+  let maxcus=event.target.maxcustomer.value;
+  let avgsale=event.target.avgsale.value;
+  let newBrach= new Branch(name,mincus,maxcus,avgsale,[]);
+  console.log(textar);
+  tableElement.innerHTML='';
+
+  header();
+
+  for(let i=0;i<textar.length-1;i++){
+
+    textar[i].render();
+  }
+
+  newBrach.gitCusNum();
+  newBrach.render();
+
+  footer();
+
+
+}
+
 
