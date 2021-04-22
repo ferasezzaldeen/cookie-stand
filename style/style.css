@@ -1,23 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 
-
+body{
+width: 960px;
+background-color: gray;
+margin: auto;
+}
 header label{
 
     display: block;
     font-family: 'Zen Dots', cursive;
-    color: rgb(221, 17, 17);
+    color: #ce1212;
     font-size: 40px;
     text-transform: capitalize;
 }
+header a{
+text-decoration: none;
+font-size: 20px;
+font-weight: bolder;
+color:#a50b0b ;
+width: 65px;
+
+
+}
+header a:hover {background-color: #353434;}
+main{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+main{
+ margin-top: 50px;
+
+}
+    
+
 main label{
-    font-family: 'Zen Dots', cursive;
-    color: rgb(221, 17, 17);
+    font-family: Arial, Helvetica, sans-serif;
+    color: #7b113a;
     font-size: 25px;
     text-transform: capitalize;
 }
 main li{
-    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
     text-transform: capitalize;
+    color: #150e56
 }
 
  #indexheader{
@@ -34,8 +61,8 @@ header{
     width: 960px;
 }
 header section img {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
 }
 
 header section {
